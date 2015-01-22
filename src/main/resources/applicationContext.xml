@@ -28,7 +28,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!--dataSource pool -->
 		<property name="dataSource" ref="dataSource" />
-		<!--configLocation属性指定mybatis的核心配置文件value="classpath:mybatis.xml -->
+		<!--configLocation for mybatis's configuration file value="classpath:mybatis.xml -->
 		<property name="configLocation" value="classpath:mybatis-cfg.xml" />
 		<!-- mapperLocation -->
 		<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
@@ -36,6 +36,7 @@
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
 		<property name="basePackage" value="hello.mybatis.data"/>
+		<!-- configuration for multiple database -->
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  -->
 	</bean> 
 </beans> 
