@@ -4,6 +4,7 @@ import java.util.List;
 
 import hello.mybatis.model.Mark;
 
+
 public interface IMarkOperation {
 	
 	public Mark selectMarkByID(int id);
