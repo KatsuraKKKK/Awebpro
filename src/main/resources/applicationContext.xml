@@ -10,6 +10,7 @@
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
 	default-autowire="byName" default-lazy-init="false">
 
+
 	<!-- connection pool -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -34,7 +35,7 @@
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
-		<property name="basePackage" value="hello.mybatis.inter"/>
+		<property name="basePackage" value="hello.mybatis.data"/>
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  -->
 	</bean> 
 </beans> 

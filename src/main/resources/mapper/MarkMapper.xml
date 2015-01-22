@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hello.mybatis.data.MarkMapper">
+
+<!-- 为了返回list 类型而定义的returnMap -->
+	<resultMap type="Mark" id="resultListMark">
+	    <id column="id" property="id" />
+	    <result column="item_id" property="item_id" />
+	    <result column="money" property="money" />
+	    <result column="time" property="time" />
+	    <result column="discr" property="discr" />
+	</resultMap>
+	
+	<resultMap type="Item" id="resultListItem">
+		<id column="id" property="id" />
+	    <result column="name" property="name" />
+	    <result column="provider_id" property="provider_id" />
+	</resultMap>
+
+	<resultMap id="resultItemMarkList" type="Mark">
+		<id property="id" column="id" />
+		<result column="money" property="money" />
+		<result column="time" property="time"/>
+		<result column="discr" property="discr"/>
+
+		<association property="item" javaType="Item" resultMap="resultListItem"/>
+	</resultMap>
+
+    <select id="selectMarkByID" parameterType="int" resultType="Mark">
+        select * from `mark` where id = #{id}
+    </select>
+    
+    <select id="selectMarks" parameterType="String" resultMap="resultListMark">
+    	select * from mark where discr like #{discr}
+    </select>
+    
+    <!--  -->
+    <insert id="addMark" parameterType="Mark" useGeneratedKeys="true" keyProperty="id">
+    	insert into mark(item_id, money, time, discr) values(#{item_id}, #{money}, #{time, jdbcType=DATE}, #{discr})
+    </insert>
+    
+    <update id="updateMark" parameterType="Mark">
+    	update mark set item_id=#{item_id}, money=#{money}, time=#{time}, discr=#{discr} where id=#{id}
+    </update>
+    
+    <delete id="deleteMark" parameterType="int">
+    	delete from mark where id=#{id}
+    </delete>
+    
+    <select id="getItemMarks" parameterType="int" resultMap="resultItemMarkList">
+    	select * from mark, item where mark.item_id=item.id and item.id=#{id}
+    </select>
+</mapper>

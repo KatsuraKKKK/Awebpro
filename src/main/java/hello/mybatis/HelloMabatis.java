@@ -1,6 +1,6 @@
 package hello.mybatis;
 
-import hello.mybatis.inter.IMarkOperation;
+import hello.mybatis.data.MarkMapper;
 import hello.mybatis.model.Mark;
 
 import java.io.Reader;
@@ -34,7 +34,7 @@ public class HelloMabatis {
 		helloMybatis.init();
 		helloMybatis.getItemMarks();
 		*/
-		IMarkOperation mapper = (IMarkOperation)applicationContext.getBean("markMapper");
+		MarkMapper mapper = (MarkMapper)applicationContext.getBean("markMapper");
 		Mark mark = mapper.selectMarkByID(1);
 		System.out.println(mark.getDiscr());
 	}
@@ -55,7 +55,7 @@ public class HelloMabatis {
 			Mark mark = (Mark)session.selectOne("hello.mybatis.model.MarkMapper.selectMarkByID", 1);
 			*/
 			
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			Mark mark = markOperation.selectMarkByID(1);
 			
 			System.out.println(mark.getDiscr());
@@ -68,7 +68,7 @@ public class HelloMabatis {
 	public void listResult() {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			List<Mark> marks = markOperation.selectMarks("%");
 			
 			for(Mark mark : marks) {
@@ -92,7 +92,7 @@ public class HelloMabatis {
 		mark.setDiscr("add mark");
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			markOperation.addMark(mark);
 			session.commit();
 			listResult();
@@ -105,7 +105,7 @@ public class HelloMabatis {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			listResult();
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			Mark mark = markOperation.selectMarkByID(1);
 			mark.setMoney(mark.getMoney() + 1);
 			markOperation.updateMark(mark);
@@ -120,7 +120,7 @@ public class HelloMabatis {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
 			listResult();
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			markOperation.deleteMark(2);
 			session.commit();
 			listResult();
@@ -132,7 +132,7 @@ public class HelloMabatis {
 	public void getItemMarks() {
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
-			IMarkOperation markOperation = session.getMapper(IMarkOperation.class);
+			MarkMapper markOperation = session.getMapper(MarkMapper.class);
 			List<Mark> marks = markOperation.getItemMarks(1);
 			
 			for(Mark mark : marks) {
