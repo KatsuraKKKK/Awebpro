@@ -235,13 +235,21 @@
 		</dependency>
 		<!-- spring end -->
 
-		<!-- webo java api -->
+		<!-- weibo java api begin -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
+		<!-- weibo java api end -->
 
+		<!-- quartz2 begin -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		<!-- quartz2 end -->
 	</dependencies>
 
 
