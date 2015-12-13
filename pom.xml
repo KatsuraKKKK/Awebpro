@@ -250,6 +250,22 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- quartz2 end -->
+		
+		<!-- thumbnailator begin -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		<!-- thumbnailator end -->
+
+		<!-- xml begin -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
+		<!-- xml end -->
 	</dependencies>
 
 

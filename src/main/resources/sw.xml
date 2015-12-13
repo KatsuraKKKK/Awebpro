@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SzfsTwsCallback>
+	<omsgtype>BATCHACP</omsgtype>
+	<oversion>2.0</oversion>
+	<osubnode>B00000000005</osubnode>
+	<omsgno>1430901141757</omsgno>
+	<osubdate>20150506</osubdate>
+	<oseqid>2015050510000000019</oseqid>
+	<otransno>148472</otransno>
+	<status>00</status>
+	<procode>FSBR0000</procode>
+	<remark>模拟银行处理304业务返回202回执信息。</remark>
+	<bizresult>
+		<acpbankno>710584000001</acpbankno>
+		<chkdate>20150507</chkdate>
+		<setwrkdate>20150507</setwrkdate>
+		<netno>2</netno>
+		<totalnum>2</totalnum>
+		<totalmoney>2.06</totalmoney>
+		<trnnum>2</trnnum>
+		<trnmoney>2.06</trnmoney>
+		<details>
+			<detail>
+				<lstno>1</lstno>
+				<contractno>CD201408140010</contractno>
+				<dtstatus>00</dtstatus>
+				<dtprocode>FSBR0000</dtprocode>
+				<dtremark>模拟银行处理304业务返回202回执信息。</dtremark>
+				<custbankno>710584000001  </custbankno>
+				<custaccno>710584000001</custaccno>
+				<custaccname>万勇</custaccname>
+				<dtpaymoney>1.04</dtpaymoney>
+				<dttrnmoney>1.04</dttrnmoney>
+				<returnflag>0</returnflag>
+			</detail>
+			<detail>
+				<lstno>2</lstno>
+				<contractno>YB201408210090</contractno>
+				<dtstatus>00</dtstatus>
+				<dtprocode>FSBR0000</dtprocode>
+				<dtremark>模拟银行处理304业务返回202回执信息。</dtremark>
+				<custbankno>710584000001  </custbankno>
+				<custaccno>710584000001</custaccno>
+				<custaccname>张泳秋</custaccname>
+				<dtpaymoney>1.02</dtpaymoney>
+				<dttrnmoney>1.02</dttrnmoney>
+				<returnflag>0</returnflag>
+			</detail>
+		</details>
+	</bizresult>
+</SzfsTwsCallback>
