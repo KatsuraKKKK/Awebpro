@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.github.katsurakotarou.awebpro</groupId>
-	<artifactId>Awebpro</artifactId>
+	<groupId>io.github.katsurakkkk.aio</groupId>
+	<artifactId>AIO</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Awebpro Maven Webapp</name>
+	<name>AIO Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring-version>3.2.8.RELEASE</spring-version>
+		<spring-version>4.2.3.RELEASE</spring-version>
 		<spring-security-versioin>2.0.5.RELEASE</spring-security-versioin>
 		<skipCompressWebapp>false</skipCompressWebapp>
 		<jdk-version>1.8</jdk-version>
@@ -254,7 +254,7 @@
 
 
 	<build>
-		<finalName>HelloMybatis</finalName>
+		<finalName>AIO</finalName>
 		<!-- config the plugin version for the submodule -->
 		<pluginManagement>
 			<plugins>
@@ -345,7 +345,7 @@
 						</goals>
 						<configuration>
 							<encoding>UTF-8</encoding>
-							<outputDirectory>${project.build.directory}/HelloMybatis/WEB-INF/lib</outputDirectory>
+							<outputDirectory>${project.build.directory}/AIO/WEB-INF/lib</outputDirectory>
 							<resources>
 								<resource>
 									<directory>lib/</directory>
