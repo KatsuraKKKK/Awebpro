@@ -5,13 +5,24 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class LambdaTest {
 	public static void main(String[] args) {
 		LambdaTest LT = new LambdaTest();
-		LT.runnableTest();
-		LT.comparatorTest();
+//		LT.runnableTest();
+//		LT.comparatorTest();
+		LT.parrSteamTest();
+	}
+	
+	public void parrSteamTest() {
+		List<Person> pl = new ArrayList<Person>();
+		for (int i = 0; i < 100; i++) {
+			pl.add(new Person(i + ""));
+		}
+		
+		pl.parallelStream().forEach((p) -> System.out.println(p.surName));
 	}
 
 	public void runnableTest() {
@@ -82,6 +93,8 @@ public class LambdaTest {
 				roboCall(p);
 			}
 		}
+		
+//		pl.parallelStream().forEach((p) -> p.surName.equals("A"));
 	}
 
 	public void roboCall(Person p) {
