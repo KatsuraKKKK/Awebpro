@@ -44,6 +44,66 @@ public class CFT {
             }
         }
 		/**
+		 * @return the arrayA
+		 */
+		public int[] getArrayA() {
+			return arrayA;
+		}
+		/**
+		 * @param arrayA the arrayA to set
+		 */
+		public void setArrayA(int[] arrayA) {
+			this.arrayA = arrayA;
+		}
+		/**
+		 * @return the a
+		 */
+		public int getA() {
+			return a;
+		}
+		/**
+		 * @param a the a to set
+		 */
+		public void setA(int a) {
+			this.a = a;
+		}
+		/**
+		 * @return the b
+		 */
+		public long getB() {
+			return b;
+		}
+		/**
+		 * @param b the b to set
+		 */
+		public void setB(long b) {
+			this.b = b;
+		}
+		/**
+		 * @return the arrayB
+		 */
+		public long[] getArrayB() {
+			return arrayB;
+		}
+		/**
+		 * @param arrayB the arrayB to set
+		 */
+		public void setArrayB(long[] arrayB) {
+			this.arrayB = arrayB;
+		}
+		/**
+		 * @return the arrayC
+		 */
+		public CFT[] getArrayC() {
+			return arrayC;
+		}
+		/**
+		 * @param arrayC the arrayC to set
+		 */
+		public void setArrayC(CFT[] arrayC) {
+			this.arrayC = arrayC;
+		}
+		/**
 		 * @return the addressa
 		 */
 		public static long getAddressa() {
@@ -82,10 +142,8 @@ public class CFT {
 		/**
 		 * @return the u
 		 */
-		public static sun.misc.Unsafe getU() {
+		public static Unsafe getU() {
 			return U;
 		}
-        
-        
 	}
 }
