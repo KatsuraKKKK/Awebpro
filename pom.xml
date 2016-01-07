@@ -9,9 +9,10 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring-version>3.2.8.RELEASE</spring-version>
+		<spring-version>4.2.3.RELEASE</spring-version>
 		<spring-security-versioin>2.0.5.RELEASE</spring-security-versioin>
 		<skipCompressWebapp>false</skipCompressWebapp>
+		<jdk-version>1.8</jdk-version>
 	</properties>
 
 	<dependencies>
