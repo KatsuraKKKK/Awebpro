@@ -1,5 +1,6 @@
 package com.github.katsurakkkk;
 
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Hello world!
@@ -7,13 +8,37 @@ package com.github.katsurakkkk;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
+    	try {
+    		System.out.println("try");
+    		aException();
+    	} catch (Exception e) {
+    		System.out.println("catch before");
+    		throw new Exception();
+    	}finally {
+    		System.out.println("finally");
+    	}
+    	long WORD_MASK = 0xffffffffffffffffL;
+    	System.out.println(Long.toBinaryString(WORD_MASK));
+    	long WORD_MASK1 = 0xffffffffffffffffL << 1;
+    	System.out.println(Long.toBinaryString(WORD_MASK1));
+    	long WORD_MASK2 = 0xffffffffffffffffL << 64;
+    	System.out.println(Long.toBinaryString(WORD_MASK2));
+    	long WORD_MASK3 = 0xffffffffffffffffL << 66;
+    	System.out.println(Long.toBinaryString(WORD_MASK3));
+    	long WORD_MASK4 = 0xffffffffffffffffL >>> 4;
+//    	System.out.println(StringUtils.leftPad(Long.toBinaryString(WORD_MASK4), 64, "0"));
+//    	System.out.println(String.format("%010x", WORD_MASK4));
         App app = new App();
         app.testEquals();
     }
     
-    public void testEquals() {
+    private static void aException() throws Exception {
+    	throw new Exception();
+	}
+
+	public void testEquals() {
     	A a = new A();
     	a.printClass();
     	B b = new B();

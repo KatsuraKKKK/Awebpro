@@ -250,7 +250,7 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- quartz2 end -->
-		
+
 		<!-- thumbnailator begin -->
 		<dependency>
 			<groupId>net.coobird</groupId>
@@ -266,6 +266,12 @@
 			<version>1.4.8</version>
 		</dependency>
 		<!-- xml end -->
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
 	</dependencies>
 
 
