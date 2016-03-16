@@ -1,5 +1,9 @@
 package com.github.katsurakkkk;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -32,6 +36,9 @@ public class App
 //    	System.out.println(String.format("%010x", WORD_MASK4));
         App app = new App();
         app.testEquals();
+        
+        List<String> alist = new ArrayList<String>();
+        Collections.unmodifiableCollection(alist);
     }
     
     private static void aException() throws Exception {
