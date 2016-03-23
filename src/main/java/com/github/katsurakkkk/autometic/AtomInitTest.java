@@ -7,15 +7,49 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class AtomInitTest {
-	private final int THREAD_NUMBER = 10000;
+	private final int THREAD_NUMBER = 1000;
 	
 //	private AtomicLong id = new AtomicLong(-1);
-	private NotVolatieId id = new NotVolatieId(-1);
+	private volatile NotVolatieId id = new NotVolatieId(-1);
 	
 	private CountDownLatch latch = new CountDownLatch(THREAD_NUMBER);
 	private ExecutorService exec = Executors.newFixedThreadPool(THREAD_NUMBER);
 	
-	class TestRunnable implements Runnable {
+	class ProductorRunnable implements Runnable {
+
+		@Override
+		public void run() {
+			try {
+				System.out.println("wait to begin");
+				latch.await();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+//			while (true) {
+				System.out.println("set AtomicLong");
+				Random random = new Random();
+				long newId = random.nextInt(10000) + 1;
+//				id = new AtomicLong(newId);
+				id = new NotVolatieId(newId);
+//			}
+		}
+	}
+	
+	class FreeProductorRunnable implements Runnable {
+
+		@Override
+		public void run() {
+//			while (true) {
+				System.out.println("set AtomicLong");
+				Random random = new Random();
+				long newId = random.nextInt(10000) + 1;
+//				id = new AtomicLong(newId);
+				id = new NotVolatieId(newId);
+//			}
+		}
+	}
+	
+	class ComsumerRunnable implements Runnable {
 
 		@Override
 		public void run() {
@@ -27,26 +61,27 @@ public class AtomInitTest {
 			}
 			while (true) {
 				long tempId = id.get();
+				System.out.println(tempId);
 				if (tempId == 0 ) {
 					while (true) {
-						System.out.println(tempId);
 						System.out.println("concurrency error###############################################################################");
 					}
 				}
-				System.out.println("set AtomicLong");
-				Random random = new Random();
-				long newId = random.nextInt(10000) + 1;
-//				id = new AtomicLong(newId);
-				id = new NotVolatieId(newId);
 			}
 		}
 	}
 	
 	public void multiThreadTest() {
-		for (int i = 0; i < THREAD_NUMBER; i++) {
-			exec.submit(new TestRunnable());
+		for (int i = 0; i < THREAD_NUMBER / 2; i++) {
 			System.out.println(i);
+			exec.submit(new ProductorRunnable());
 			latch.countDown();
+			exec.submit(new ComsumerRunnable());
+			latch.countDown();
+		}
+		
+		while (true) {
+			exec.submit(new FreeProductorRunnable());
 		}
 	}
 	
