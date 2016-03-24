@@ -1,7 +1,5 @@
 package com.github.katsurakkkk.memcached;
 
-import java.util.Date;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
