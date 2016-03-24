@@ -271,6 +271,53 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
+
+		<!-- java memcached release 2.6.6 -->
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- java memcached release 2.6.6 end -->
+
+		<!-- alisoft xplatform asf cache 2.5.1 -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>hessian</groupId>
+			<artifactId>hessian</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>woodstox</groupId>
+			<artifactId>wstx-asl</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<!-- alisoft xplatform asf cache 2.5.1 end -->
+
 	</dependencies>
 
 
