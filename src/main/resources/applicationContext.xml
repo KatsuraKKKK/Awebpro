@@ -40,4 +40,16 @@
 		<!-- configuration for multiple database -->
 		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  -->
 	</bean> 
+	
+	    
+     <aop:config>
+        <aop:aspect id="TestAspect" ref="aspectBean">
+            <!--配置com.spring.service包下所有类或接口的所有方法-->
+            <aop:pointcut id="businessService" expression="execution(* com.spring.service.*.*(..))" />
+            <aop:before pointcut-ref="businessService" method="doBefore"/>
+            <aop:after pointcut-ref="businessService" method="doAfter"/>
+            <aop:around pointcut-ref="businessService" method="doAround"/>
+            <aop:after-throwing pointcut-ref="businessService" method="doThrowing" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
 </beans> 
