@@ -4,5 +4,7 @@
 /.settings/
 /.classpath
 .classpath
+
+#intellij
 /.idea/
-/AIO.iml
+AIO.iml

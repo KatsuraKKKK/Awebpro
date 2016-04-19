@@ -265,6 +265,7 @@ public class MemcachedCacheManager implements ICacheManager<IMemcachedCache>
 			}
 			catch(Exception ex)
 			{
+				Logger.error(ex.getStackTrace());
 				Logger.error(new StringBuilder().append("Not find class name:")
 						.append(node.getErrorHandler())
 						.append("please check space char or tab char"));
