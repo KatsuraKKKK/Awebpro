@@ -63,3 +63,55 @@ class InitCodeTest {
 		System.out.println("i=" + i + "|j=" + j);
 	}
 }
+
+
+abstract class Contents {
+	abstract public int value();
+}
+
+interface Destination {
+	String readLabel();
+}
+
+class Parcel {
+	private class PContents extends Contents {
+		private int i = 11;
+
+		@Override
+		public int value() {
+			return i;
+		}
+	}
+
+	protected class PDestination implements Destination {
+		private String label;
+
+		private PDestination(String whereTo) {
+			label = whereTo;
+		}
+
+		@Override
+		public String readLabel() {
+			return label;
+		}
+	}
+
+	public Destination dest(String s) {
+		return new PDestination(s);
+	}
+
+	public Contents cont() {
+		return new PContents();
+	}
+}
+
+class Test {
+	public static void main(String[] args) {
+		Parcel p = new Parcel();
+		Contents c = p.cont();
+		Destination d = p.dest("ShenZhen");
+		// Illegal -- can't access private class:
+		//! Parcel.PContents c = p.new Pcontents();
+	}
+}
+
