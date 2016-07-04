@@ -14,7 +14,11 @@ public class Sort {
 
     /**
      * 直接插入排序
-     *
+     * 不稳定
+     * 时间复杂度:O(n^2)
+     * 最差时间复杂度:O(n^2)
+     * 空间复杂度:O(1)
+     * 使用场景:大部分元素有序
      * @param elements
      * @param comparator
      * @param <T>
@@ -41,13 +45,35 @@ public class Sort {
 
     /**
      * 希尔排序
-     *
+     * 不稳定
+     * 时间复杂度:O(nlogn)
+     * 最差时间复杂度:O(n^s) 1<s<2
+     * 空间复杂度:O(1)
+     * 使用场景:元素小于5000
      * @param elements
      * @param comparator
      * @param <T>
      */
     public <T> void shellSort(T[] elements, Comparator<T> comparator) {
-
+        if (isInputInvalid(elements, comparator)) {
+            return;
+        }
+        int length = elements.length;
+        for (int gap = length/2; gap >= 1; gap /= 2) {
+            for (int i = gap; i < length; i++) {
+                T current = elements[i];
+                int j;
+                for (j = i; j >= gap; j = j - gap) {
+                    if (comparator.compare(elements[j - gap], current) > 0) {
+                        elements[j] = elements[j - gap];
+                    } else {
+                        break;
+                    }
+                }
+                elements[j] = current;
+            }
+//            printArray(elements, "gap:" + gap);
+        }
     }
 
     //================================================================
@@ -56,7 +82,11 @@ public class Sort {
 
     /**
      * 选择排序
-     *
+     * 稳定
+     * 时间复杂度:O(n^2)
+     * 最差时间复杂度:O(n^2)
+     * 空间复杂度:O(1)
+     * 使用场景:n较少时
      * @param elements
      * @param comparator
      * @param <T>
@@ -82,7 +112,10 @@ public class Sort {
 
     /**
      * 堆排序
-     *
+     * 时间复杂度:O(nlogn)
+     * 最差时间复杂度:O(nlogn)
+     * 空间复杂度:O(n)
+     * 使用场景:n较大时
      * @param elements
      * @param comparator
      * @param <T>
@@ -107,7 +140,10 @@ public class Sort {
 
     /**
      * 冒泡排序
-     *
+     * 稳定
+     * 时间复杂度:O(n^2)
+     * 空间复杂度:O(1)
+     * 使用场景:n较小时
      * @param elements
      * @param comparator
      * @param <T>
@@ -129,7 +165,11 @@ public class Sort {
 
     /**
      * 快速排序
-     *
+     * 不稳定
+     * 时间复杂度:O(nlogn)
+     * 最差时间复杂度:O(n^2)
+     * 空间复杂度:O(logn)
+     * 使用场景:由于是递归,不适合内存有限制的情况, n较大时
      * @param elements
      * @param comparator
      * @param <T>
@@ -166,13 +206,58 @@ public class Sort {
 
     /**
      * 归并排序
-     *
+     * 不稳定
+     * 时间复杂度:O(nlogn)
+     * 最差时间复杂度:O(nlogn)
+     * 空间复杂度:O(n)
+     * 使用场景:n较大时
      * @param elements
      * @param comparator
      * @param <T>
      */
     public <T> void mergeSort(T[] elements, Comparator<T> comparator) {
+        if (isInputInvalid(elements, comparator)) {
+            return;
+        }
 
+        Object[] aux = new Object[elements.length];
+        int start = 0, end = elements.length - 1;
+        doMergeSort(elements, start, end, comparator, aux);
+    }
+
+    private <T> void doMergeSort(T[] elements, int start, int end, Comparator<T> comparator, Object[] aux) {
+        if (start >= end) {
+            return;
+        }
+        int mid = (start + end) / 2;
+        doMergeSort(elements, start, mid, comparator, aux);
+        doMergeSort(elements, mid + 1, end, comparator, aux);
+        merge(elements, start, mid, end, comparator, aux);
+    }
+
+    private <T> void merge(T[] elements, int start, int mid, int end, Comparator<T> comparator, Object[] aux) {
+        int lb = start, rb = mid + 1, auxIndex = start;
+        while (lb <= mid && rb <= end) {
+            if (comparator.compare(elements[lb], elements[rb]) <= 0) {
+                aux[auxIndex++] = elements[lb++];
+            } else {
+                aux[auxIndex++] = elements[rb++];
+            }
+        }
+
+        if (lb < mid + 1) {
+            while(lb <= mid) {
+                aux[auxIndex++] = elements[lb++];
+            }
+        } else {
+            while(rb <= end) {
+                aux[auxIndex++] = elements[rb++];
+            }
+        }
+
+        for(int i = start; i <= end; i++) {
+            elements[i] = (T) aux[i];
+        }
     }
 
 
@@ -243,6 +328,10 @@ public class Sort {
         dupArray = dupArray(elements);
         sort.shellSort(dupArray, (o1, o2) -> o1 - o2);
         printArray(dupArray, "ShellSort");
+
+        dupArray = dupArray(elements);
+        sort.mergeSort(dupArray, (o1, o2) -> o1 - o2);
+        printArray(dupArray, "MergeSort");
     }
 
     private static <T> T[] dupArray(T[] array) {
