@@ -1,5 +1,7 @@
 package com.github.katsurakkkk.thinkinginjava.something;
 
+import static com.github.katsurakkkk.thinkinginjava.something.WithInner.*;
+
 /**
  * Created by KatsuraKKKK on 2016/5/6 0006.
  */
@@ -51,6 +53,9 @@ class InitCodeTest {
 
 	{
 		i = increase(1);
+		if (i > 1) {
+			System.out.println("1-2");
+		}
 		j = increase(2);
 	}
 
@@ -115,3 +120,13 @@ class Test {
 	}
 }
 
+class WithInner {
+	class Inner {}
+}
+
+class InheritInner extends WithInner.Inner {
+	// InheritInner() {} // Compile error.
+	InheritInner(WithInner wi) {
+		wi.super();
+	}
+}
