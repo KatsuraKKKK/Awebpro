@@ -16,7 +16,7 @@ public class TreeMapTry {
 		map.put(8, "Five");
 		map.put(6, "Four");
 		
-		SortedMap<Integer, String> smap = map.tailMap(9);
+		SortedMap<Integer, String> smap = map.tailMap(6);
 		
 		System.out.println(smap.firstKey());
 		
