@@ -234,13 +234,13 @@
         </dependency>
         <!-- spring end -->
 
-        <!-- weibo java api begin -->
+        <!-- activiti begin -->
         <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>5.21.0</version>
         </dependency>
-        <!-- weibo java api end -->
+        <!-- activiti end -->
 
         <!-- quartz2 begin -->
         <dependency>
