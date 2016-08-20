@@ -127,6 +127,9 @@ public class ConcurrencyInPratice {
 			completionService.submit(new Callable<String>() {
 				@Override
 				public String call() throws Exception {
+					if (Thread.currentThread().isInterrupted()) {
+						return "interrupted";
+					}
 					int st = (int)(Math.random() * 5000);
 					Thread.sleep(st);
 					return Thread.currentThread().getId() + ":" + st;
@@ -143,6 +146,51 @@ public class ConcurrencyInPratice {
 				e.printStackTrace();
 			}
 
+		}
+	}
+
+	/**
+	 * 取消: 即使任务不响应中断,限时运行的方法仍能够返回到他的调用者。在任务启动以后偶timedRun执行一个限时的join方法,
+	 * 在join返回后,将检查是否有异常抛出,有的话再次抛出异常,由于Throwable在两个线程之间共享,所以设置为volatile
+	 */
+	public void timeRun(final Runnable r) throws Throwable {
+		ScheduledExecutorService cancelExec = Executors.newScheduledThreadPool(5);
+		class  RethrowableTask implements Runnable {
+			private volatile Throwable t;
+			@Override
+			public void run() {
+				try {
+					r.run();
+				} catch (Throwable t) {
+					this.t = t;
+				}
+			}
+			void rethrow() throws Throwable {
+				if (t != null) {
+					throw t;
+				}
+			}
+		}
+
+		RethrowableTask task = new RethrowableTask();
+		final Thread taskThread = new Thread(task);
+		taskThread.start();
+		cancelExec.schedule(() -> taskThread.interrupt(), 100000, TimeUnit.MILLISECONDS);
+		taskThread.join(10000);
+		task.rethrow();
+	}
+
+	public void betterTimeRun(Runnable r) throws Throwable {
+		ExecutorService executorService = Executors.newFixedThreadPool(5);
+		Future<?> task = executorService.submit(r);
+		try {
+			task.get(10000, TimeUnit.MILLISECONDS);
+		} catch (TimeoutException e) {
+			// 在finally中被取消
+		} catch (ExecutionException e) {
+			throw e.getCause();
+		} finally {
+			task.cancel(true);
 		}
 	}
 }
