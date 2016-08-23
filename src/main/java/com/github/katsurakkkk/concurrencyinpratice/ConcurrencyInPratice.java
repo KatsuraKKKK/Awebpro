@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 /**
  * Created by katsurakkkk on 8/18/16.
  */
-public class ConcurrencyInPratice {
+public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
 	public void hello() {
 		System.out.println("Hello");
 	}
@@ -193,4 +193,91 @@ public class ConcurrencyInPratice {
 			task.cancel(true);
 		}
 	}
+
+    /**
+     * 对于unchecked异常,可以实现UncaughtExceptionHandler接口,当一个线程由于未捕获异常而退出时,JVM会把这个事件告报给应用程序提供的
+     * UncaughtExceptionHandler,如果没有提供任何异常处理器,那么默认的行为是将栈追踪信息输出到System.error
+     */
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+
+    }
+
+    /**
+     * 当关闭线程池时保存被取消的任务
+     */
+	class TrackingExecutor extends AbstractExecutorService {
+        private final ExecutorService exec;
+        private final Set<Runnable> tasksCancelledAtShutdown = Collections.synchronizedSet(new HashSet<Runnable>());
+
+        public TrackingExecutor() {
+            this.exec = Executors.newCachedThreadPool();
+        }
+
+        public List<Runnable> getCancelledTasks() {
+            if (!exec.isTerminated()) {
+                throw new IllegalStateException("...");
+            }
+            return new ArrayList<Runnable>(tasksCancelledAtShutdown);
+        }
+
+        @Override
+        public void shutdown() {
+
+        }
+
+        @Override
+        public List<Runnable> shutdownNow() {
+            return null;
+        }
+
+        @Override
+        public boolean isShutdown() {
+            return false;
+        }
+
+        @Override
+        public boolean isTerminated() {
+            return false;
+        }
+
+        @Override
+        public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+            return false;
+        }
+
+        @Override
+        public void execute(Runnable command) {
+            exec.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        command.run();
+                    } finally {
+                        if (isShutdown() && Thread.currentThread().isInterrupted()) {
+                            tasksCancelledAtShutdown.add(command);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * 典型线程池工作者线程结构
+     */
+    public void run() {
+        Throwable thrown = null;
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                // Run task...
+            }
+        } catch (Throwable e) {
+            thrown = e;
+        } finally {
+            // Exited the thread...
+        }
+    }
+
+
 }
