@@ -59,4 +59,9 @@ public class ConcurrencyInPraticeTest {
 	public void TestCompletionService() {
 		cip.completionService();
 	}
+
+	@Test
+	public void testTryLock() {
+		cip.tryLock();
+	}
 }

@@ -2,6 +2,7 @@ package com.github.katsurakkkk.concurrencyinpratice;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.*;
 
 /**
  * Created by katsurakkkk on 8/18/16.
@@ -280,4 +281,90 @@ public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
     }
 
 
+	/**
+	 * tryLock() 如果能够获得锁即获得锁并返回true,否则返回false
+	 */
+	public void tryLock() {
+		final int[] data = {0};
+		ReentrantLock lock1 = new ReentrantLock();
+		ReentrantLock lock2 = new ReentrantLock();
+
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean tag = false;
+				for(int i = 0; i < 10; i++) {
+					while (true) {
+						if (lock1.tryLock()) {
+							try {
+								if (lock2.tryLock()) {
+									try {
+										data[0]++;
+										System.out.println("++");
+										tag = true;
+									} finally {
+										lock2.unlock();
+									}
+								}
+							} finally {
+								lock1.unlock();
+							}
+						}
+
+						if (tag) {
+							tag = false;
+							break;
+						}
+					}
+				}
+			}
+		});
+
+		Thread thread2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean tag = false;
+				for(int i = 0; i < 10; i++) {
+					while (true) {
+						if (lock2.tryLock()) {
+							try {
+								if (lock1.tryLock()) {
+									try {
+										data[0]--;
+										System.out.println("--");
+										tag = true;
+									} finally {
+										lock1.unlock();
+									}
+								}
+							} finally {
+								lock2.unlock();
+							}
+						}
+
+						if (tag) {
+							tag = false;
+							break;
+						}
+					}
+				}
+			}
+		});
+
+		thread1.start();
+		thread2.start();
+
+		try {
+			thread1.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			thread2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(data[0]);
+	}
 }
