@@ -46,12 +46,9 @@ public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
 	 * FutureTask
 	 */
 	public String futureTask() throws ExecutionException, InterruptedException {
-		FutureTask<String> future = new FutureTask<String>(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				Thread.currentThread().sleep(3000);
-				return "Hello Future.";
-			}
+		FutureTask<String> future = new FutureTask<>(() -> {
+			Thread.currentThread().sleep(3000);
+			return "Hello Future.";
 		});
 
 		Thread thread = new Thread(future);
@@ -294,6 +291,11 @@ public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
 			public void run() {
 				boolean tag = false;
 				for(int i = 0; i < 10; i++) {
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					while (true) {
 						if (lock1.tryLock()) {
 							try {
@@ -325,6 +327,11 @@ public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
 			public void run() {
 				boolean tag = false;
 				for(int i = 0; i < 10; i++) {
+					try {
+						Thread.sleep(400);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					while (true) {
 						if (lock2.tryLock()) {
 							try {
@@ -366,5 +373,54 @@ public class ConcurrencyInPratice implements Thread.UncaughtExceptionHandler {
 		}
 
 		System.out.println(data[0]);
+	}
+
+
+	/**
+	 * Condition
+	 */
+	class ConditionBoundeBuffer<T> {
+		protected final Lock lock = new ReentrantLock();
+
+		private final Condition notFull = lock.newCondition();
+		private final Condition notEmpty = lock.newCondition();
+
+		private final T[] items = (T[]) new Object[3];
+		private int tail, head, count;
+
+		public void put(T x) throws InterruptedException {
+			lock.lock();
+			try {
+				while (count == items.length) {
+					notEmpty.await();
+				}
+				items[tail] = x;
+				if (++tail == items.length)
+					tail = 0;
+				++count;
+				notEmpty.signal();
+			} finally {
+				lock.unlock();
+			}
+		}
+
+		public T take() throws InterruptedException {
+			lock.lock();
+			try {
+				while (count == 0) {
+					notEmpty.await();
+				}
+				T x = items[head];
+				items[head] = null;
+				if (++head == items.length) {
+					head = 0;
+				}
+				--count;
+				notFull.signal();
+				return x;
+			} finally {
+				lock.unlock();
+			}
+		}
 	}
 }
