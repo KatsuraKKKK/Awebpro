@@ -1,4 +1,4 @@
-package hello.mybatis.model;
+package com.github.katsurakkkk.mybatis.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package hello.mybatis.model;
+package com.github.katsurakkkk.mybatis.model;
 
 public class Item {
 	private int id;

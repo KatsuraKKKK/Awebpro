@@ -1,8 +1,8 @@
-package hello.mybatis.data;
+package com.github.katsurakkkk.mybatis.mapper;
 
 import java.util.List;
 
-import hello.mybatis.model.Mark;
+import com.github.katsurakkkk.mybatis.model.Mark;
 
 
 public interface MarkMapper {

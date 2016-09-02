@@ -7,7 +7,7 @@ import org.springframework.context.support.*;
  */
 public class Server {
 	public static void main(String[] args) throws Exception {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("server.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo/server.xml");
 		context.start();
 
 		System.in.read(); // 为保证服务一直开着，利用输入流的阻塞来模拟

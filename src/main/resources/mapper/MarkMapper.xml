@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="hello.mybatis.data.MarkMapper">
+<mapper namespace="com.github.katsurakkkk.mybatis.mapper.MarkMapper">
 
 <!-- 为了返回list 类型而定义的returnMap -->
 	<resultMap type="Mark" id="resultListMark">

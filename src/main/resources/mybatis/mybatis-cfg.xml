@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias = "Mark" type = "hello.mybatis.model.Mark" />
-		<typeAlias alias = "Item" type = "hello.mybatis.model.Item" />
+		<typeAlias alias = "Mark" type = "com.github.katsurakkkk.mybatis.model.Mark" />
+		<typeAlias alias = "Item" type = "com.github.katsurakkkk.mybatis.model.Item" />
 	</typeAliases>
 </configuration>

@@ -1,12 +1,12 @@
-package hello.mybatis.controller;
+package com.github.katsurakkkk.mybatis.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import hello.mybatis.data.MarkMapper;
-import hello.mybatis.model.Mark;
+import com.github.katsurakkkk.mybatis.mapper.MarkMapper;
+import com.github.katsurakkkk.mybatis.model.Mark;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
