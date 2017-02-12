@@ -34,7 +34,7 @@ public class App
 //    	System.out.println(String.format("%010x", WORD_MASK4));
         App app = new App();
         app.testEquals();
-        
+
         List<String> alist = new ArrayList<String>();
         Collections.unmodifiableCollection(alist);
     }
