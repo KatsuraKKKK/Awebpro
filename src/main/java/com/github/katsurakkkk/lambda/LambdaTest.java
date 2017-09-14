@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class LambdaTest {
 	public static void main(String[] args) {
+		System.out.println(1_____1);
 		LambdaTest LT = new LambdaTest();
 //		LT.runnableTest();
 //		LT.comparatorTest();
