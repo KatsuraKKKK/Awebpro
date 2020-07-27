@@ -1,6 +1,7 @@
 package com.github.katsurakkkk.concurrencyinpratice;
 
 import org.junit.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
 
