@@ -8,60 +8,21 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.tarpitout</groupId>
-	<artifactId>AIO</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>AIO</name>
-	<description>Demo project for Spring Boot</description>
+	<artifactId>aio-parent</artifactId>
+	<version>${revision}</version>
+	<packaging>pom</packaging>
+
+	<name>${project.artifactId}</name>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<revision>1.0-SNAPSHOT</revision>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId> <!-- Use 'netty-all' for 4.0 or above -->
-			<version>4.1.22.Final</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.4</version>
-		</dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+	<modules>
+		<module>aio-all</module>
+		<module>aio-spring-boot</module>
+	</modules>
 </project>

@@ -1,0 +1,4 @@
+#debug: true
+local:
+  server:
+    port: 8080
