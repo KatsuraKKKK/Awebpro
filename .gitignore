@@ -1,0 +1,11 @@
+**/target/
+/.mvn/
+
+#project info
+/.settings/
+/.classpath
+.classpath
+
+#intellij
+/.idea/
+**.iml
