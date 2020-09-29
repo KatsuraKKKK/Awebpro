@@ -1,7 +1,11 @@
 package com.tarpitout.aio.schema.authoring.beans;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Puppy {
+    @Value("${puppy.name}")
     private String name;
+    @Value("${puppy.color}")
     private String color;
 
     public String getName() {

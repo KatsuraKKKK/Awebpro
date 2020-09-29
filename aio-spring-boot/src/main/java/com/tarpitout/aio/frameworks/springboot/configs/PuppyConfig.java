@@ -7,16 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class PuppyConfig {
-    @Value("${puppy.name}")
-    private String name;
-    @Value("${puppy.color}")
-    private String color;
+
 
     @Bean
     public Puppy puppy1() {
-        Puppy puppy = new Puppy();
-        puppy.setName(name);
-        puppy.setColor(color);
-        return puppy;
+//        Puppy puppy = new Puppy();
+//        puppy.setName(name);
+//        puppy.setColor(color);
+//        return puppy;
+        return new Puppy();
     }
 }
