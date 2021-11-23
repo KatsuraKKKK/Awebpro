@@ -1,7 +1,7 @@
 package com.tarpitout.aio.books.concurrencyinpratice;
 
-import com.tarpitout.aio.books.concurrencyinpratice.ConcurrencyInPratice;
-import org.junit.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
@@ -9,16 +9,15 @@ import java.util.concurrent.*;
 /**
  * Created by katsurakkkk on 8/18/16.
  */
-public class ConcurrencyInPraticeTest {
+public class ConcurrencyInPracticeTest {
 	private ConcurrencyInPratice cip;
 
-	@Before
+	@BeforeEach
 	public void init() {
 		cip = new ConcurrencyInPratice();
 	}
 
 	@Test
-	@Ignore
 	public void testHello() {
 		cip.hello();
 	}
